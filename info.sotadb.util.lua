@@ -21,6 +21,16 @@ function sotadbinfoCommand.findStat(args)
   end
 end
 
+function sotadbinfoCommand.PartyMembers()
+  ConsoleLog("start PartyMembers()")
+  local PartyList = GetPartyMemberNamesInScene()
+  ConsoleLog("mid PartyMembers()")
+  for k, v in pairs(PartyList) do
+    ConsoleLog(string.format("PartyMember: $d, $s", k, v))
+  end
+  ConsoleLog("end PartyMembers()")
+end
+
 function ShroudOnStart()
   sotadbinfoPlayerName = ShroudGetPlayerName()
 end
@@ -28,7 +38,7 @@ end
 -- watch for commands
 function ShroudOnConsoleInput(type, src, msg)
   if type == 'Local' and src == sotadbinfoPlayerName then
-    local cmd, arg = string.match(msg, '\\(%w+)%s+(%w*)')
+    local cmd, arg = string.match(msg, '\\(%w+)%s*(%w*)')
     if not pcall(sotadbinfoCommand[cmd], arg) then
       ConsoleLog("Command Not Found")
     end
