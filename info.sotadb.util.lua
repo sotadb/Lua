@@ -51,10 +51,10 @@ end
 -- watch for commands
 function ShroudOnConsoleInput(type, src, msg)
   if sotadbinfoMessageWatch then
-    ConsoleLog("Type: %s Src: %s Msg: %s")
+    ConsoleLog(string.format("Type: '%s' Src: '%s' Msg: '%s[-]'", type, src, msg))
   end
 
-  if type == 'Local' and src == sotadbinfoPlayerName then
+  if type == 'Local' and src == sotadbinfoPlayerName and string.find(msg, '\\%w') then
     local cmd, arg = string.match(msg, '\\(%w+)%s*(%w*)')
     if not pcall(sotadbinfoCommand[cmd], arg) then
       ConsoleLog("Command Not Found")
