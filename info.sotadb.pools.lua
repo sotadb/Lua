@@ -1,5 +1,5 @@
 
-function sotadbinfoUpdatePool()
+function infosotadbUpdatePool()
   sotadbinfoPoolOutput = string.format(" Adv Pool:\t%s\nProd Pool:\t%s",
     comma_value(ShroudGetPooledAdventurerExperience()), comma_value(ShroudGetPooledProducerExperience()))
 end
@@ -10,9 +10,9 @@ function comma_value(n) -- credit http://richard.warburton.it
 end
 
 function ShroudOnStart()
-  ShroudRemovePeriodic("sotadbinfo.UpdatePool")
-  sotadbinfoUpdatePool()
-  ShroudRegisterPeriodic("sotadbinfo.UpdatePool", "sotadbinfoUpdatePool", 1, true)
+  ShroudRemovePeriodic("infosotadb.UpdatePool")
+  infosotadbUpdatePool()
+  ShroudRegisterPeriodic("infosotadb.UpdatePool", "infosotadbUpdatePool", 1, true)
   sotadbinfoPoolX = ShroudGetScreenX() - 200
   sotadbinfoPoolY = ShroudGetScreenY() - 50
 end
