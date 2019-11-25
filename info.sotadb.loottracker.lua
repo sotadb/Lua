@@ -2,7 +2,7 @@ function ShroudOnStart()
   infosotadbLTitem = nil
   infosotadbLTWinner = {}
   infosotadbLTCount = {}
-  infosotadbLTshow = false
+  infosotadbLTshow = true
   infosotadbLToutput = ""
 end
 
@@ -32,11 +32,11 @@ function ShroudOnUpdate()
     infosotadbLTshow = not infosotadbLTshow
   end
   if infosotadbLTshow then
-    if ShroudGetOnKeyDown('L') then
+    if ShroudGetOnKeyDown('Tab') then
       infosotadbLTWinner = {}
       infosotadbLTCount = {}
     end
-    infosotadbLToutput = "Loot Rolls\n"
+    infosotadbLToutput = "             Loot Rolls\n('P' to toggle, 'Tab' to clear)\n"
     for i, k in ipairs(infosotadbLTWinner) do
       infosotadbLToutput = string.format("%s%s: %d\n", infosotadbLToutput, k, infosotadbLTCount[i])
     end
