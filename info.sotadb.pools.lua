@@ -9,6 +9,10 @@ function comma_value(n) -- credit http://richard.warburton.it
 	return left..(num:reverse():gsub('(%d%d%d)','%1,'):reverse())..right
 end
 
+function ShroudOnUpdate()
+  --Work around bugs
+end
+
 function ShroudOnStart()
   ShroudRemovePeriodic("infosotadb.UpdatePool")
   infosotadbUpdatePool()

@@ -2,11 +2,14 @@ function ShroudOnStart()
   ShroudRemovePeriodic("sotadbinfo.UpdateStats")
   infosotadbHPRatio = 1
   ShroudRegisterPeriodic("sotadbinfo.UpdateStats", "sotadbinfoUpdateStats", 1, true)
-  ConsoleLog("OnStart Finished")
 end
 
 function infosotadbUpdateStats()
   infosotadbHPRatio = ShroudPlayerCurrentHealth/ShroudGetStatValueByNumber(30)
+end
+
+function ShroudOnUpdate()
+  --Work around bugs
 end
 
 function ShroudOnGUI()
