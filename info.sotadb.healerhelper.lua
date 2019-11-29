@@ -36,6 +36,10 @@ function ShroudOnUpdate()
   --Work around bugs
 end
 
+function ShroudOnColsoleInput()
+  --Work around bugs
+end
+
 function ShroudOnGUI()
   if infosotadbHPRatio < 0.5 then
     ShroudGUILabel(800, 80, 300, 100, "<color=red><size=50>Heal thy self!</size></color>")

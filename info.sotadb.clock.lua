@@ -32,6 +32,10 @@ function ShroudOnUpdate()
   --Work around bugs
 end
 
+function ShroudOnColsoleInput()
+  --Work around bugs
+end
+
 function ShroudOnGUI()
   ShroudGUILabel(sotadbinfoClockX, sotadbinfoClockY, 200, 50, os.date("<size=20>%H:%M:%S</size>"))
 end

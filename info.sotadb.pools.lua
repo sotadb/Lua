@@ -36,6 +36,10 @@ function ShroudOnUpdate()
   --Work around bugs
 end
 
+function ShroudOnColsoleInput()
+  --Work around bugs
+end
+
 function ShroudOnStart()
   ShroudRemovePeriodic("infosotadb.UpdatePool")
   infosotadbUpdatePool()
