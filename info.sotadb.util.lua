@@ -44,13 +44,10 @@ function sotadbinfoCommand.findStat(args)
   end
 end
 
--- ShroudGetPartyMemberNamesInScene() not working?
 function sotadbinfoCommand.PartyMembers()
   ConsoleLog("start PartyMembers()")
-  local PartyList = ShroudGetPartyMemberNamesInScene()
-  ConsoleLog("mid PartyMembers()")
-  for k, v in pairs(PartyList) do
-    ConsoleLog(string.format("PartyMember: $d, $s", k, v))
+  for v in ShroudGetPartyMemberNamesInScene() do
+    ConsoleLog(string.format("%s", v))
   end
   ConsoleLog("end PartyMembers()")
 end
