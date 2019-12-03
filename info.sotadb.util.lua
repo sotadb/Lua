@@ -52,11 +52,6 @@ function sotadbinfoCommand.PartyMembers()
   ConsoleLog("end PartyMembers()")
 end
 
-function ShroudOnStart()
-  sotadbinfoMessageWatch = false
-  sotadbinfoPlayerName = ShroudGetPlayerName()
-end
-
 function sotadbinfoCommand.MessageWatch(args)
   if string.match(args, 'enable') then
     sotadbinfoMessageWatch = true
@@ -65,6 +60,19 @@ function sotadbinfoCommand.MessageWatch(args)
   else
     ConsoleLog("Usage: \\MessageWatch [enable|disable]")
   end
+end
+
+function ShroudOnStart()
+  sotadbinfoMessageWatch = false
+  sotadbinfoPlayerName = ShroudGetPlayerName()
+end
+
+function ShroudOnUpdate()
+  --Work around bugs
+end
+
+function ShroudOnGUI()
+  --Work around bugs
 end
 
 -- watch for commands
