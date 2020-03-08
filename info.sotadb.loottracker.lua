@@ -26,15 +26,15 @@ function ShroudOnStart()
   infosotadbLTitem = nil
   infosotadbLTWinner = {}
   infosotadbLTCount = {}
-  infosotadbLTshow = true
   infosotadbLToutput = ""
+  infosotadbLTX = 0
+  infosotadbLTY = 0
 end
 
 function ShroudOnConsoleInput(type, src, msg)
   if type == 'Loot' then
     if string.match(msg, 'Roll results for .+ %(') then
       infosotadbLTitem = string.match(msg, 'Roll results for (.+) %(')
-      ConsoleLog('Item: '..infosotadbLTitem)
     end
     if string.match(msg, ': .+ WON') then
       local temp = string.format('%s: %s', string.match(msg, ': (.+) WON'), infosotadbLTitem)
@@ -52,23 +52,18 @@ function ShroudOnConsoleInput(type, src, msg)
 end
 
 function ShroudOnUpdate()
-  if ShroudGetOnKeyDown('P') then
-    infosotadbLTshow = not infosotadbLTshow
-  end
-  if infosotadbLTshow then
-    if ShroudGetOnKeyDown('Tab') then
-      infosotadbLTWinner = {}
-      infosotadbLTCount = {}
-    end
-    infosotadbLToutput = "             Loot Rolls\n('P' to toggle, 'Tab' to clear)\n"
+  if ShroudIsCharacterSheetActive() then
+    infosotadbLTX, infosotadbLTY = ShroudGetCharacterSheetPosition()
+    infosotadbLTX = infosotadbLTX - 860 -- BUG
+    infosotadbLToutput = "Loot Rolls\n"
     for i, k in ipairs(infosotadbLTWinner) do
       infosotadbLToutput = string.format("%s%s: %d\n", infosotadbLToutput, k, infosotadbLTCount[i])
     end
-  else
-    infosotadbLToutput = ""
   end
 end
 
 function ShroudOnGUI()
-  ShroudGUILabel(240, 80, 300, 600, infosotadbLToutput)
+  if ShroudIsCharacterSheetActive() then
+    ShroudGUILabel(infosotadbLTX+265, infosotadbLTY, 300, 600, infosotadbLToutput)
+  end
 end

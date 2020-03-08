@@ -32,7 +32,7 @@ function ShroudOnUpdate()
   --Work around bugs
 end
 
-function ShroudOnColsoleInput()
+function ShroudOnConsoleInput()
   --Work around bugs
 end
 
