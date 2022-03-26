@@ -9,6 +9,6 @@ info.sotadb.healerhelper.lua - tells you when to heal yourself (planned to expan
 
 info.sotadb.loottracker.lua - keeps track of who wins rolls for what items
 
-info.sotadb.pools.lua - shows your adventure and production XP pools in the bottom left corner of your screen
+info.sotadb.pools.lua - shows your adventure and production XP pools / rate of change / and attenuation status (an astrisk when attenuated) in the bottom left corner of your screen
 
 info.sotadb.util.lua  - is a series of utilities for script writers. Notably for identifying stats

@@ -23,8 +23,20 @@ SOFTWARE.
 ]]
 
 function infosotadbUpdatePool()
-  sotadbinfoPoolOutput = string.format(" Adv Pool:\t%s\nProd Pool:\t%s",
-    comma_value(ShroudGetPooledAdventurerExperience()), comma_value(ShroudGetPooledProducerExperience()))
+  local adv = ShroudGetPooledAdventurerExperience()
+  local prod = ShroudGetPooledProducerExperience()
+  sotadbinfoAdv.push(adv - sotadbinfoAdvLast)
+  sotadbinfoProd.push(prod - sotadbinfoProdLast)
+  sotadbinfoAdvLast = adv
+  sotadbinfoProdLast = prod
+
+  local AdvAtt = ShroudGetAttenuationAdventurerStatus() and '*' or ' '
+  local ProdAtt = ShroudGetAttenuationProducerStatus() and '*' or ' '
+
+  sotadbinfoPoolOutput = string.format("%s Adv Pool: %s @ %s/h\n%sProd Pool: %s @ %s/h",
+    AdvAtt, comma_value(adv), comma_value(sotadbinfoAdv.sAve()), 
+    ProdAtt, comma_value(prod), comma_value(sotadbinfoProd.sAve()))
+
 end
 
 function comma_value(n) -- credit http://richard.warburton.it
@@ -42,12 +54,41 @@ end
 
 function ShroudOnStart()
   ShroudRemovePeriodic("infosotadb.UpdatePool")
+  sotadbinfoAdv = sotadbinfoXPTnew()
+  sotadbinfoProd = sotadbinfoXPTnew()
+  sotadbinfoAdvLast = ShroudGetPooledAdventurerExperience()
+  sotadbinfoProdLast = ShroudGetPooledProducerExperience()
   infosotadbUpdatePool()
   ShroudRegisterPeriodic("infosotadb.UpdatePool", "infosotadbUpdatePool", 1, true)
-  sotadbinfoPoolX = ShroudGetScreenX() - 200
+  sotadbinfoPoolX = ShroudGetScreenX() - 300
   sotadbinfoPoolY = ShroudGetScreenY() - 50
 end
 
 function ShroudOnGUI()
-  ShroudGUILabel(sotadbinfoPoolX, sotadbinfoPoolY, 200, 50, sotadbinfoPoolOutput)
+  ShroudGUILabel(sotadbinfoPoolX, sotadbinfoPoolY, 300, 50, sotadbinfoPoolOutput)
+end
+
+function sotadbinfoXPTnew ()
+  local self = {first = 0, last = -1, tot = 0, list={}}
+  local time = 3600
+
+  local push = function (v)
+                local last = self.last + 1
+                self.last = last
+                self.list[last] = v
+                local tot = self.tot + v
+                self.tot = tot
+                if self.last - self.first > time then
+                  local tot = self.tot - self.list[self.first]
+                  self.tot = tot
+                  self.list[self.first] = nil
+                  local first = self.first + 1
+                  self.first = first
+                end
+              end
+
+  local sAve = function () return math.floor((self.tot / ( 1 + self.last - self.first ))*3600) end
+  local peek = function () return self.list[self.last] end
+
+  return {push = push, sAve = sAve, peek = peek}
 end
