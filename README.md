@@ -1,7 +1,7 @@
 # LuaScripts
 This is a set of Lua scripts for Shroud of the Avatar. Just drop the ones you
-want to use in your Lua directory (and run "/lua reload", if the game is
-already running).
+want to use in your Lua directory (/datafolder will open the directory), and 
+run "/lua reload", if the game is already running. 
 
 info.sotadb.clock.lua - a clock showing the real-life time (so you don't lose track when in full-screen)
 
